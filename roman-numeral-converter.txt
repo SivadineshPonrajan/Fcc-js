@@ -1,0 +1,51 @@
+function convertToRoman(num) {
+  var arr = num.toString().split("");
+  var roman = [];
+  console.log(arr);
+  var refer = {
+      one: "I",
+      five: "V",
+      ten: "X",
+      fifty: "L",
+      hundred: "C",
+      fiveHundred: "D",
+      thousand: "M"};
+  
+  function doIt(x, low, mid, high){
+    if (x < 4)
+      roman.push(low.repeat(x));
+    else if (x == 4)
+      roman.push(low + mid);
+    else if (x == 5)
+      roman.push(mid);
+    else if(x < 9) 
+      roman.push(mid + low.repeat(x-5));
+    else if(x==9)
+      roman.push(low + high);
+  } 
+  
+  if (arr.length === 1) {
+    doIt(arr[0], refer.one, refer.five, refer.ten);
+  }
+  else if (arr.length === 2) {
+    doIt(arr[0], refer.ten, refer.fifty, refer.hundred);
+    doIt(arr[1], refer.one, refer.five, refer.ten);
+  }
+  else if (arr.length === 3) {
+    doIt(arr[0], refer.hundred, refer.fiveHundred, refer.thousand);
+    doIt(arr[1], refer.ten, refer.fifty, refer.hundred);
+    doIt(arr[2], refer.one, refer.five, refer.ten);
+  } 
+  else if (arr.length === 4) {
+    roman.push(refer.thousand.repeat(arr[0]));
+    doIt(arr[1], refer.hundred, refer.fiveHundred, refer.thousand);
+    doIt(arr[2], refer.ten, refer.fifty, refer.hundred);
+    doIt(arr[3], refer.one, refer.five, refer.ten);
+  }
+   
+  console.log(roman.join(""));
+  return roman.join("");
+  
+} 
+
+convertToRoman(1000);

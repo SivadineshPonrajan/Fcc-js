@@ -1,0 +1,13 @@
+function palindrome(str) {
+  // Good luck!
+  str = str.toLowerCase().match(/[a-z0-9]*/g).join("");
+  var rev = str.split("").reverse().join("");
+  if(str === rev)
+  return true;
+  else
+  return false;
+}
+
+
+
+palindrome("2A3*3a2");
